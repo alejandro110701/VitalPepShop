@@ -9,19 +9,25 @@ WordPress.com → Hosting → **Staging**: crea (o actualiza) el sitio de stagin
 haz ahí los pasos 1–3 primero. El checkout de bloques, Clip y SPEI se prueban
 igual en staging (Clip en modo prueba o sin completar el pago).
 
-## 1. Opción A — GitHub Deployments (recomendada, deja el repo como fuente)
+## 1. Opción A — GitHub Deployments (ACTIVA desde el 3-nov-2026)
 
-1. Haz push de este repo a `alejandro110701/VitalPepShop`, rama `main`.
-2. WordPress.com → Hosting → sitio **vitalpep.shop** → **Deployments** →
-   «Connect repository» → autoriza la app «WordPress.com for Developers» y
-   elige el repo `VitalPepShop`.
-3. Ajustes:
-   - **Deployment branch**: `main`
-   - **Destination directory**: `/wp-content/plugins/vitalpeptides-shop`
-   - **Deployment mode**: Simple
-   - **Automatic deployments**: *Manual* en producción (Automatic en staging)
-4. «Trigger manual deployment». El archivo `.deployignore` evita subir docs y
-   README.
+El repo ya está conectado en WordPress.com → sitio **vitalpep.shop** →
+Settings → Repositories:
+
+- **Repository**: `alejandro110701/VitalPepShop`
+- **Deployment branch**: `main`
+- **Destination directory**: `/wp-content/plugins/vitalpeptides-shop`
+- **Deployment mode**: Simple
+- **Automated deployments**: ON → cada push a `main` se despliega solo.
+
+Es decir: **fusionar a `main` = desplegar a producción**. Trabaja en ramas y
+fusiona cuando esté probado. Si prefieres aprobar cada despliegue a mano,
+apaga «Automated deployments» en Configure repository y usa «Trigger manual
+deployment». El archivo `.deployignore` evita subir docs, preview y README.
+
+Nota: el primer despliegue se hizo con destino `VitalPepShop` (nombre del
+repo) y creó una copia duplicada en `plugins/VitalPepShop`; al corregir el
+destino, WordPress.com retiró esa copia sola.
 
 ## 1. Opción B — ZIP desde el panel (la más rápida)
 
