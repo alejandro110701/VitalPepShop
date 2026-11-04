@@ -1,0 +1,7 @@
+.deployignore
+.gitignore
+.github/
+.claude/
+docs/
+preview/
+README.md
