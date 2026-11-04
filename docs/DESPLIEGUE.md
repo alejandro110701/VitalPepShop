@@ -23,7 +23,21 @@ igual en staging (Clip en modo prueba o sin completar el pago).
 4. «Trigger manual deployment». El archivo `.deployignore` evita subir docs y
    README.
 
-## 1. Opción B — scp (como el resto de mu-plugins)
+## 1. Opción B — ZIP desde el panel (la más rápida)
+
+Genera el ZIP (sólo los archivos del plugin, con la carpeta `vitalpeptides-shop/` en la raíz):
+
+```bash
+cd /Users/alejandrovalencia/Claude && rm -rf /tmp/vps && mkdir -p /tmp/vps/vitalpeptides-shop && rsync -a --exclude .git --exclude .gitignore --exclude .deployignore --exclude docs --exclude preview --exclude README.md VitalPepShop/ /tmp/vps/vitalpeptides-shop/ && (cd /tmp/vps && zip -qr vitalpeptides-shop.zip vitalpeptides-shop) && cp /tmp/vps/vitalpeptides-shop.zip dist/
+```
+
+Luego en wp-admin: **Plugins → Añadir nuevo → Subir plugin** → `dist/vitalpeptides-shop.zip`
+→ Instalar → Activar. (También sirve el conector MCP de WordPress.com:
+`plugin.upload-request` + `curl` + `plugin.upload` + `plugin.activate`; en el
+modo automático de Claude Code hay que permitir
+`mcp__…__wpcom-mcp-plugin-management` o lo bloquea como «Production Deploy».)
+
+## 1. Opción C — scp (como el resto de mu-plugins)
 
 ```bash
 scp -r /Users/alejandrovalencia/Claude/VitalPepShop vpshop:/srv/htdocs/wp-content/plugins/vitalpeptides-shop
