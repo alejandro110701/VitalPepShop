@@ -3,7 +3,7 @@
  * Plugin Name: VitalPeptides Shop — marca, rastreo de pedidos y reseñas
  * Plugin URI: https://github.com/alejandro110701/VitalPepShop
  * Description: Viste vitalpep.shop con el diseño de vitalpeptides.app (cabecera, pie, tipografía Geist, paleta navy/azul), añade la página «Rastrear pedido» (estado del pago, guía y liga de rastreo), la página «Reseñas» con todas las reseñas verificadas, y refuerzos de confianza en el checkout. No toca el flujo de pago: el checkout de bloques de WooCommerce y el puente vp-buy/vp-cart siguen intactos.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: VitalPeptides
  * Requires at least: 6.5
  * Requires PHP: 8.1
@@ -17,6 +17,8 @@
  * - Crea tres páginas al activarse (Inicio → portada, Rastrear pedido, Reseñas).
  *   Al desactivarse devuelve la portada a como estaba; no borra páginas.
  * - Endpoint público POST /wp-json/vp/v1/rastreo (número de pedido + correo).
+ * - Desde 1.1.0: GET /wp-json/vp/v1/reviews sin el tope de 6 por producto
+ *   (sustituye la respuesta del mu-plugin vp-reviews, mismo formato).
  *
  * APAGADO RÁPIDO: desactivar el plugin. Todo vuelve al estado anterior.
  */
@@ -25,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'VP_SHOP_VERSION', '1.0.0' );
+define( 'VP_SHOP_VERSION', '1.1.0' );
 define( 'VP_SHOP_FILE', __FILE__ );
 define( 'VP_SHOP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'VP_SHOP_URL', plugin_dir_url( __FILE__ ) );
@@ -48,6 +50,7 @@ require_once VP_SHOP_DIR . 'includes/class-vp-shop-icons.php';
 require_once VP_SHOP_DIR . 'includes/class-vp-shop-brand.php';
 require_once VP_SHOP_DIR . 'includes/class-vp-shop-rastreo.php';
 require_once VP_SHOP_DIR . 'includes/class-vp-shop-resenas.php';
+require_once VP_SHOP_DIR . 'includes/class-vp-shop-reviews-api.php';
 require_once VP_SHOP_DIR . 'includes/class-vp-shop-inicio.php';
 require_once VP_SHOP_DIR . 'includes/class-vp-shop-pages.php';
 
@@ -67,6 +70,7 @@ add_action(
 		VP_Shop_Brand::init();
 		VP_Shop_Rastreo::init();
 		VP_Shop_Resenas::init();
+		VP_Shop_Reviews_API::init();
 		VP_Shop_Inicio::init();
 		VP_Shop_Pages::init();
 	}
