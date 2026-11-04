@@ -12,7 +12,10 @@ Código de **vitalpep.shop**, el host de pago y seguimiento de pedidos de
   caja aparece en la página de gracias y en Mi cuenta → Pedido;
 - añade **Reseñas verificadas** (`/resenas/`) con todas las reseñas aprobadas
   de WooCommerce y un resumen en portada y bajo el checkout;
-- crea la **portada** que explica qué se hace aquí (pagar, rastrear, cuenta).
+- crea la **portada** que explica qué se hace aquí (pagar, rastrear, cuenta);
+- (1.1.0) sirve `GET /wp-json/vp/v1/reviews` sin el tope de 6 reseñas por
+  producto del mu-plugin `vp-reviews` (mismo formato; hasta 50 por producto),
+  que es lo que consume vitalpeptides.app en fichas, portada y `/resenas`.
 
 El checkout de bloques, el puente `?vp-buy` / `?vp-cart` y los mu-plugins
 `vp-*` no se tocan.
